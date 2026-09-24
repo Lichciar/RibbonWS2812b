@@ -3,7 +3,7 @@
 # Версии PATCH ни на что не влияет.
 MAJOR = 0
 MINOR = 0
-PATCH = 1
+PATCH = 2
 
 TARGET_MCU	:= attiny13a
 TARGET_FCPU := 9600000
@@ -26,8 +26,12 @@ all: $(HEX)
 	avr-gcc $(GXX_FLAGS) $(GXX_TARGET) -o ./Build/main.o ./Source/main.c
 	@echo Building: $@
 
-$(ELF): ./Build/main.o
-	avr-gcc -mmcu=$(TARGET_MCU) -o $(ELF) ./Build/main.o
+./Build/ribbonWS2812b.o: ./Source/ribbonWS2812b.c Makefile
+	avr-gcc $(GXX_FLAGS) $(GXX_TARGET) -o ./Build/ribbonWS2812b.o ./Source/ribbonWS2812b.c
+	@echo Building: $@
+
+$(ELF): ./Build/main.o ./Build/ribbonWS2812b.o
+	avr-gcc -mmcu=$(TARGET_MCU) -o $(ELF) ./Build/main.o ./Build/ribbonWS2812b.o
 	@echo Linking: $@
 
 $(HEX): $(ELF)
