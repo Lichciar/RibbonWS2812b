@@ -1,0 +1,13 @@
+# Игнорируем исполняемый файл.
+firmware_*.hex
+# Игнорируем ключ от github.
+github.key
+# Игнорируем файлы настройки Zed'а.
+.clangd
+# Игнорируем каталог со сборкой проекта.
+Build/*.o
+# Игнорируем временные файлы.
+Source/main.s
+Source/main_backup_work.c
+Source/submain.c
+Source/Treset.c
